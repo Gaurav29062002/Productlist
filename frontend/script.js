@@ -1,26 +1,21 @@
-const apiUrl = 'https://productlist-6to8.onrender.com/'; // Replace this with your real backend URL
+console.log("Script loaded");
 
-async function loadProducts() {
-  try {
-    const res = await fetch(apiUrl);
-    const products = await res.json();
+fetch('https://productlist-6to8.onrender.com/')
+  .then(res => res.json())
+  .then(data => {
+    console.log("Products fetched:", data);
 
-    const container = document.getElementById('product-list');
-    container.innerHTML = '';
+    const container = document.getElementById('product-container');
+    container.innerHTML = '';  // clear container
 
-    products.forEach(product => {
-      const card = document.createElement('div');
-      card.className = 'product-card';
-      card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
+    data.forEach(product => {
+      const div = document.createElement('div');
+      div.innerHTML = `
         <h3>${product.name}</h3>
-        <p>₹ ${product.price}</p>
+        <p>Price: $${product.price}</p>
+        <img src="${product.image}" alt="${product.name}" width="100" />
       `;
-      container.appendChild(card);
+      container.appendChild(div);
     });
-  } catch (error) {
-    console.error('Error loading products:', error);
-  }
-}
-
-loadProducts();
+  })
+  .catch(err => console.error("Fetch error:", err));
