@@ -1,4 +1,4 @@
-const apiUrl = 'https://productlist-6to8.onrender.com'; // Replace this with your real backend URL
+const apiUrl = 'https://productlist-6to8.onrender.com/'; // Replace this with your real backend URL
 
 async function loadProducts() {
   try {
